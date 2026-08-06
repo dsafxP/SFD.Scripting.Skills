@@ -1,0 +1,31 @@
+# Script Lifecycle Events
+
+```cs
+public static void OnStartup()
+{
+    // The game will always call the following method "public void OnStartup()" during a map start (or script activates).
+    // No triggers required. This is run before triggers that activate on startup (and before OnStartup triggers).
+    Game.ShowPopupMessage("OnStartup is run when the map or script is started.");
+
+    // This is the recommended place to hook up any events. To register an update loop:
+    Game.Events.StartUpdateCallback(OnUpdate);
+    // For more available events, explore the ScriptAPI documentation for more information.
+}
+
+public static void OnUpdate(float elapsed)
+{
+    // Update loop (must be enabled in the OnStartup() function or AfterStartup() function).
+}
+
+public static void AfterStartup()
+{
+    // The game will always call the following method "public void AfterStartup()" after a map start (or script activates).
+    // No triggers required. This is run after triggers that activate on startup (and after OnStartup triggers).
+}
+
+public static void OnShutdown()
+{
+    // The game will always call the following method "public void OnShutdown()" before a map restart (or script deactivates).
+    // Perform some cleanup here or store some final information to Game.Data/Game.LocalStorage/Game.SessionStorage if needed.
+}
+```
