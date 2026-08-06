@@ -8,6 +8,8 @@ Skills for AI assistants that scaffold, code and exemplify Superfighters Deluxe 
 
 [![GitHub License](https://img.shields.io/github/license/dsafxP/SFD.Scripting.Skills)](LICENSE)
 
+</div>
+
 ## 💡 Skills
 
 ### sfd-api-templates
