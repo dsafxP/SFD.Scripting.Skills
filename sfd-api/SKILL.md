@@ -136,6 +136,13 @@ dotnet fsi scripts/dump_api.fsx -f <path-to-SFD.GameScriptInterface.dll>
 
 The default output path matches the cache location, so no `-o` is usually needed.
 
+**Always fall back to recreating the dump — never roll your own reflection.** These two
+scripts are the *only* sanctioned way to inspect the API. If a query fails or returns
+nothing (for example because `/tmp/sfd_api_dump.json` vanished), do **not** work around it
+with ad-hoc .NET/Python reflection or by decompiling the assembly yourself. Instead, stop,
+regenerate the dump with `dump_api.fsx` as above, and re-run your `query_api.fsx` lookup.
+Treat any attempt at direct reflection as an error to avoid, not a fallback.
+
 ### 2. Query symbols
 
 ```sh
