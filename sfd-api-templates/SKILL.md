@@ -70,10 +70,15 @@ Every `.cs` file that contributes to the script must:
 - declare `public partial class GameScript : GameScriptInterfaceExtended`, and
 - nest its members **inside** that class (this is what lets them all see `Game`).
 
-`using` directives are **not allowed** in the welded output except the implicit
-`SFDGameScriptInterface`. If the generator refuses to run because a file has `using`
-directives, fully-qualify the types instead. You can group feature files into folders
-(`Utils/`, `Events/`, etc.) — every `@(Compile)` file is welded in.
+`using` directives are **not allowed** in the welded output, but that's not a burden you
+need to think about for the obvious cases: implicit .NET usings (`System`, collections,
+etc.) and `SFDGameScriptInterface` are already available implicitly, so write them plainly —
+**don't** fully-qualify `System.String` or `SFDGameScriptInterface.IGame`. The rule only
+bites for anything *outside* those, which is the same set that would normally need a new
+`using`. For that, prefer fully qualifying over adding another `using` directive. If the
+generator refuses to run because a file has `using` directives, replace them by
+fully-qualifying only those non-implicit references. You can group feature files into
+folders (`Utils/`, `Events/`, etc.) — every `@(Compile)` file is welded in.
 
 ## Essential manual step — LibrarySetup
 
