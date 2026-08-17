@@ -116,7 +116,9 @@ dotnet build -t:GenerateScript
 This compiles the project, then runs the generator over all `.cs` files and writes the
 welded script to the project output directory as `<ProjectName>.txt`. That `.txt` is the
 file you load as the script in Superfighters Deluxe. The tooling may emit harmless warnings
-during these steps — ignore them rather than trying to fix them.
+during these steps — ignore them rather than trying to fix them. Do **not** bother
+inspecting or verifying the generated `.txt` output — the weld is deterministic and not your
+concern; the build succeeding is the only signal you need.
 
 ## Everything else — read the bundled README
 
@@ -129,7 +131,7 @@ guessing at the tools.
 
 | Symptom | Cause / fix |
 | --- | --- |
-| Generator errors mentioning `using` | A contributing `.cs` file has a non-allowed `using`; fully-qualify the types instead. |
+| Generator errors mentioning `using` | A contributing `.cs` file has a non-allowed `using`; fully-qualify only the non-implicit references it introduces. |
 | Build fails on SDK version | The installed DLL version differs from `<RequiredGameSdkVersion>`; run LibrarySetup with `--force`. |
 | DLL missing in `lib/` / build can't find it | LibrarySetup wasn't run, or the DLL isn't committed (it's `gitignore`d by design — run LibrarySetup on each fresh checkout). |
 | `sfd-script` template not found | User has not run `dotnet new install SFDScript`; ask them to. |
