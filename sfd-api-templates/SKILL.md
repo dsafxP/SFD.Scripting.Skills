@@ -109,16 +109,23 @@ dotnet fsi tools/SFD.ScriptTools.LibrarySetup.fsx --file <path-to-dll>
 
 ## Build and generate the script
 
+A plain build is usually all you need:
+
 ```sh
-dotnet build -t:GenerateScript
+dotnet build
 ```
 
-This compiles the project, then runs the generator over all `.cs` files and writes the
-welded script to the project output directory as `<ProjectName>.txt`. That `.txt` is the
-file you load as the script in Superfighters Deluxe. The tooling may emit harmless warnings
-during these steps — ignore them rather than trying to fix them. Do **not** bother
-inspecting or verifying the generated `.txt` output — the weld is deterministic and not your
-concern; the build succeeding is the only signal you need.
+Compiling alone validates your C# against the script API. **Do not generate the script by
+default** — generating (`dotnet build -t:GenerateScript`) welds all `.cs` files into the
+loadable `<ProjectName>.txt` and takes longer than a plain build, so it is only worth doing
+when the user actually asks for the final script. Default to `dotnet build`; reserve the
+`-t:GenerateScript` weld for when the user wants the actual `.txt` output
+
+The weld writes the script to the project output directory as `<ProjectName>.txt` — the
+file you load in Superfighters Deluxe. The tooling may emit harmless warnings during these
+steps — ignore them rather than trying to fix them. Do **not** bother inspecting or
+verifying the generated `.txt` output — the weld is deterministic and not your concern; the
+build succeeding is the only signal you need.
 
 ## Everything else — read the bundled README
 
