@@ -224,13 +224,19 @@ types exactly as emitted; don't "fix" or rename them.
 
 ### 4. Verify before you write (mandatory sequence)
 
-Use the navigation scripts to confirm every API touchpoint *before* typing it into code.
-For any feature you implement, look up — at minimum — the `Game`/`IGame` members, the
+Use the navigation scripts to confirm every API touchpoint *before typing new code*. When you
+are about to **write** code, look up — at minimum — the `Game`/`IGame` members, the
 `Game.Events` callback, and any `IPlayer`/`IObject`/`...Info` types involved, and copy the
 verified signatures into what you write. Start with `--index`/`--list` to orient yourself,
 then `--type` into `IGame`, `IGameEventsHandler`, `IPlayer`, `IObject`, `IProjectile`, and
 the relevant `...Callback`/`...Info` types. A failed compile is *not* a substitute for this
 step — verify first.
+
+This verification applies **only to code you are about to write** — not to existing code.
+When asked to **review, inspect, or modify already-existing code**, do not re-verify its API
+members against the dump; that's wasted effort. Instead, treat the build as the source of
+truth for existing code — building the project surfaces any wrong API members in what's
+already there.
 
 ## Examples
 
